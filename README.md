@@ -10,9 +10,11 @@ Three AI agents for QA automation — showcase portfolio and source code.
 
 ## Live links
 
-- **Portfolio (Vercel):** _Add URL after deploy_
-- **Test Orchestrator UI (Vercel):** _Add URL after deploy_
+- **Portfolio (Vercel):** https://portfolio-khaki-mu-48.vercel.app
+- **Test Orchestrator UI (Vercel):** https://web-one-chi-16.vercel.app
 - **GitHub:** https://github.com/Manjusha3010/3-AI-Agents-QA
+
+> **Note:** The Vercel UI needs a hosted API (e.g. Railway) with `VITE_API_URL` set, or run locally with `START.bat`. Portfolio and GitHub include full source and screenshots.
 
 ## Quick start (Test Orchestrator locally)
 
