@@ -671,3 +671,9 @@ tbody tr:hover {
   background: #14532d;
   color: #bbf7d0;
 }
+
+.code-preview {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.8rem;
+  color: #a5d6ff;
+}

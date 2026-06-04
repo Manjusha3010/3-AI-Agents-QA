@@ -14,8 +14,8 @@
       <p class="project-tags">React · FastAPI · Jira · QA Automation</p>
       <h1>Test Orchestrator</h1>
       <p class="project-lead">
-        Full-stack web app: pull user stories from Jira, generate AI test plans and structured test cases,
-        then export Playwright or Selenium automation code — one sidebar, end-to-end.
+        Full-stack web app: connect Jira, generate AI test plans and structured test cases for real projects
+        (e.g. app.vwo.com), then export Playwright or Selenium scripts — dashboard, history, and code in one UI.
       </p>
       <div class="project-actions">
         <a class="btn-primary" href="https://web-one-chi-16.vercel.app" target="_blank" rel="noopener">Open Live App (Vercel)</a>
@@ -25,15 +25,15 @@
 
     <section class="panel">
       <h2>How the app flows</h2>
-      <p class="section-intro">React UI talks to FastAPI; FastAPI calls Jira and your chosen LLM (Groq, Gemini, or Ollama).</p>
+      <p class="section-intro">Screens below follow the same order you use in the app — from Jira story to automation code.</p>
       <div class="flow-diagram" aria-label="Test Orchestrator user journey">
-        <div class="flow-node">Jira story<br><span>Fetch / sample</span></div>
+        <div class="flow-node">Jira QA-10<br><span>VWO / PRD story</span></div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-node">Test plan<br><span>AI markdown</span></div>
+        <div class="flow-node">Test plan<br><span>100 cases scope</span></div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-node accent">Test cases<br><span>Structured JSON</span></div>
+        <div class="flow-node accent">8 test cases<br><span>TC-QA-10-*</span></div>
         <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-node">Code Generator<br><span>Playwright / Selenium</span></div>
+        <div class="flow-node">Playwright JS<br><span>app.vwo.com</span></div>
       </div>
     </section>
 
@@ -42,128 +42,172 @@
       <ol class="steps-list">
         <li>
           <strong>Connect Jira &amp; LLM</strong>
-          <span>Settings for Groq/Gemini/Ollama; Jira URL + API token — or load sample stories without Jira.</span>
+          <span>Verify Jira URL + token; configure Groq, Gemini, or Ollama (e.g. llama3.2:3b).</span>
         </li>
         <li>
-          <strong>Generate test plan</strong>
-          <span>Pick a story → AI writes a markdown plan you can copy or extend.</span>
+          <strong>Fetch stories &amp; generate plan</strong>
+          <span>Pick <strong>QA-10</strong> → AI writes a markdown plan for app.vwo.com testing.</span>
         </li>
         <li>
-          <strong>Create test cases</strong>
-          <span>From the plan → structured cases with steps, priority, status — edit in Test Case Creator.</span>
+          <strong>Create &amp; manage test cases</strong>
+          <span>Structured cases with steps and expected results; dashboard filters and bulk actions.</span>
         </li>
         <li>
-          <strong>Dashboard &amp; automation</strong>
-          <span>Filter cases on the dashboard; Code Generator outputs Playwright (JS/Python) or Selenium (Python).</span>
+          <strong>Generate Playwright / Selenium code</strong>
+          <span>Per-case scripts (e.g. registration flow on https://app.vwo.com). Story history keeps prior sessions.</span>
         </li>
       </ol>
     </section>
 
     <section class="panel">
-      <h2>Example story (this project)</h2>
-      <pre class="story-box">Jira: SCRUM-42 — API rate limiting for partner integrations
+      <h2>Example story (from Jira — this demo)</h2>
+      <pre class="story-box">Jira: QA-10
+Title: Create 100 Test cases for app.vwo.com as per the attached PRD document
 
-Summary:
-As an API consumer, I want rate limits enforced per API key
-so that platform stability is protected under load.
+User story:
+Create 100 test cases for app.vwo.com as per the attached PRD document.
 
-You click: Generate Test Plan → Create Test Cases → Code Generator (Playwright)</pre>
+Workflow in app:
+Jira Integration → Generate Test Plan → Create Test Cases from Plan
+→ Test Case Creator / Dashboard → Code Generator (Playwright JS, chromium)</pre>
     </section>
 
     <section class="panel">
-      <h2>Sample output: test case excerpt</h2>
-      <p class="output-sub">After plan generation — structured cases in the app</p>
+      <h2>Sample output: generated test cases (QA-10)</h2>
+      <p class="output-sub">8 cases mapped to QA-10 — excerpt matching the app dashboard &amp; creator</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>ID</th>
               <th>Title</th>
-              <th>Steps</th>
+              <th>Steps (summary)</th>
               <th>Expected</th>
               <th>Priority</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>TC-SCRUM-42-1</td>
-              <td>Under limit — requests succeed</td>
-              <td>Send N requests below threshold</td>
-              <td>All return 200</td>
+              <td>TC-QA-10-2</td>
+              <td>Invalid Login Credentials</td>
+              <td>Open app.vwo.com → invalid email/password → login</td>
+              <td>Failed login</td>
               <td><span class="badge badge-high">High</span></td>
             </tr>
             <tr>
-              <td>TC-SCRUM-42-2</td>
-              <td>Over limit — 429 returned</td>
-              <td>Exceed per-key quota in 1 minute</td>
-              <td>HTTP 429 + Retry-After header</td>
+              <td>TC-QA-10-4</td>
+              <td>Registration with Invalid Credentials</td>
+              <td>Open app → register → invalid credentials</td>
+              <td>Failed registration</td>
               <td><span class="badge badge-high">High</span></td>
             </tr>
             <tr>
-              <td>TC-SCRUM-42-3</td>
-              <td>Invalid API key rejected</td>
-              <td>Call endpoint with bad key</td>
-              <td>401 Unauthorized</td>
+              <td>TC-QA-10-5</td>
+              <td>Dashboard Layout and Content</td>
+              <td>Open app → dashboard tab</td>
+              <td>Correct layout and content</td>
+              <td><span class="badge badge-medium">Medium</span></td>
+            </tr>
+            <tr>
+              <td>TC-QA-10-3</td>
+              <td>Registration with Valid Credentials</td>
+              <td>Open app → register → valid email/password → submit</td>
+              <td>Successful registration</td>
+              <td><span class="badge badge-high">High</span></td>
+            </tr>
+            <tr>
+              <td>TC-QA-10-1</td>
+              <td>Valid Login Credentials</td>
+              <td>Open app → valid login</td>
+              <td>Successful login</td>
               <td><span class="badge badge-high">High</span></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="demo-hint">Story history saves prior Jira keys (plan + cases) when you switch tickets.</p>
+      <p class="demo-hint">
+        Dashboard KPIs for this run: 1 test plan, 8 test cases, 3 with generated code, 4 stories in history.
+        Plan objective: comprehensive VWO app testing per PRD (login, registration, dashboard, navigation, search).
+      </p>
     </section>
 
     <section class="panel">
-      <h2>App screens (sidebar)</h2>
-      <ul class="feature-list">
-        <li>Dashboard — KPIs and summary table</li>
-        <li>Jira Integration Module — connect, fetch stories</li>
-        <li>Test Plan Generator · Test Case Creator · Test Case Dashboard</li>
-        <li>Code Generator · Story history · Settings</li>
-      </ul>
+      <h2>Sample output: Playwright code (TC-QA-10-3)</h2>
+      <pre class="story-box code-preview">// Playwright (JavaScript) — Registration with Valid Credentials
+const { test, expect } = require('@playwright/test');
+
+test.describe('Registration with Valid Credentials', () => {
+  test('should register successfully', async ({ page }) => {
+    await page.goto('https://app.vwo.com');
+    await page.click('[data-testid="register-button"]');
+    await page.fill('#email', 'test@example.com');
+    await page.fill('#password', 'TestPassword123!');
+    await page.click('button[type="submit"]');
+  });
+});</pre>
     </section>
 
     <section class="panel">
       <h2>Quick setup</h2>
-      <p class="flow-label">Local (full features)</p>
+      <p class="flow-label">Local (full features — screenshots below)</p>
       <ol class="steps-list numbered-plain">
         <li>Install <strong>Node.js</strong> + <strong>Python 3.11+</strong></li>
-        <li>Open <code>Test Orchestrator</code> → run <strong>START.bat</strong></li>
-        <li>Browser: <strong>http://127.0.0.1:8000</strong> — keep the server window open</li>
-        <li>Settings → LLM key → Jira (or sample stories) → generate plan &amp; cases</li>
+        <li>Run <strong>START.bat</strong> in <code>Test Orchestrator</code></li>
+        <li>Open <strong>http://127.0.0.1:8000</strong> → Settings (LLM) → Jira → QA-10 → plan → cases → code</li>
       </ol>
       <p class="flow-label">Vercel UI only</p>
       <ol class="steps-list numbered-plain">
-        <li>Use <strong>Open Live App</strong> above for the React frontend</li>
-        <li>For API calls from Vercel, host <code>server/</code> on Railway/Render and set <code>VITE_API_URL</code></li>
+        <li><strong>Open Live App</strong> for the React UI</li>
+        <li>Host <code>server/</code> on Railway/Render and set <code>VITE_API_URL</code> for API calls</li>
       </ol>
     </section>
 
     <section class="panel panel-note">
       <h2>Important note</h2>
       <p>
-        <strong>Vercel</strong> hosts the frontend build. <strong>FastAPI</strong> must run locally (<code>START.bat</code>) or on a Python host for Jira/LLM generation.
-        API keys stay in your browser (localStorage) for demo use.
+        Screenshots are from a local run (<code>127.0.0.1:8000</code>). Vercel hosts the frontend;
+        <strong>FastAPI</strong> + your LLM/Jira keys are required for live generation.
       </p>
     </section>
 
     <section class="panel">
-      <h2>Screenshots</h2>
+      <h2>Screenshots (workflow order)</h2>
       <div class="screenshot-grid">
         <figure>
-          <img src="assets/orch-dashboard.png" alt="Test Orchestrator dashboard" />
-          <figcaption>Dashboard — overview and test-case summary</figcaption>
+          <img src="assets/orch-settings.png" alt="LLM settings with Ollama connection verified" />
+          <figcaption>1. Settings — LLM provider (Ollama / Groq / Gemini) + Test Connection</figcaption>
         </figure>
         <figure>
-          <img src="assets/orch-jira.png" alt="Jira integration screen" />
-          <figcaption>Jira Integration — connect and fetch user stories</figcaption>
+          <img src="assets/orch-jira.png" alt="Jira integration with QA-10 and QA-7 stories" />
+          <figcaption>2. Jira Integration — connect &amp; fetch stories (QA-10 app.vwo.com PRD)</figcaption>
         </figure>
         <figure>
-          <img src="assets/orch-plan.png" alt="Test plan generator" />
-          <figcaption>Test Plan Generator — AI plan from selected story</figcaption>
+          <img src="assets/orch-plan.png" alt="Test plan generator for QA-10 VWO app" />
+          <figcaption>3. Test Plan Generator — AI plan for QA-10 (VWO App Testing)</figcaption>
         </figure>
         <figure>
-          <img src="assets/orch-cases.png" alt="Test case creator" />
-          <figcaption>Test Case Creator — review and edit generated cases</figcaption>
+          <img src="assets/orch-plan-detail.png" alt="Test plan scope and Create Test Cases button" />
+          <figcaption>4. Test plan detail — environment, deliverables → Create Test Cases from Plan</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-cases.png" alt="Generated test cases for QA-10" />
+          <figcaption>5. Test Case Creator — 8 cases with steps, expected results, Generate Code</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-case-dashboard.png" alt="Test case dashboard table" />
+          <figcaption>6. Test Case Dashboard — filter, sort, bulk Mark Ready / Delete</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-dashboard.png" alt="Main dashboard KPIs and test case table" />
+          <figcaption>7. Dashboard — KPIs, search, Open Code Generator</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-history.png" alt="Story history with QA-10 and other Jira keys" />
+          <figcaption>8. Story history — restore QA-10 (8 cases + plan) or prior stories</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-code.png" alt="Playwright code generator for TC-QA-10-3" />
+          <figcaption>9. Code Generator — Playwright JS for registration on app.vwo.com</figcaption>
         </figure>
       </div>
     </section>
