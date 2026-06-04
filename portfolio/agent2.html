@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>n8n Advanced RAG | Agent 2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-page">
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <header class="agent2-hero">
+      <h1>n8n Advanced RAG</h1>
+      <p>Document ingestion and AI chat with vector search and Cohere re-ranking</p>
+    </header>
+
+    <section class="panel">
+      <h2>How it works</h2>
+      <p style="color: var(--muted); margin-bottom: 1rem;">
+        Upload a file via the form trigger → chunks are embedded (Mistral) and stored in Qdrant.
+        Ask questions in chat → the AI agent retrieves context, re-ranks with Cohere, and answers with Groq.
+      </p>
+      <div class="tech-stack" style="border-left-color: var(--orange); margin-bottom: 0;">
+        <strong>Tech Stack:</strong> n8n + Qdrant + Mistral + Cohere + Groq
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Workflow &amp; chat</h2>
+      <div class="feature-grid">
+        <figure>
+          <img src="assets/n8n-1.png" alt="n8n ingestion workflow" />
+          <figcaption>Ingestion pipeline</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/n8n-2.png" alt="n8n RAG chat" />
+          <figcaption>RAG chat output</figcaption>
+        </figure>
+      </div>
+      <p class="demo-hint" style="margin-top: 1.25rem;">
+        Import <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/N8N_Advance_RAG" target="_blank" rel="noopener">AdvanceRAG.json</a> into your n8n instance and connect API credentials.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

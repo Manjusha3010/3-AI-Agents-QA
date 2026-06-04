@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QA Test Case Generator | Agent 1</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-page">
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <section class="panel">
+      <h2>Paste Your Requirements</h2>
+      <textarea id="requirements" readonly placeholder="Paste your user story or acceptance criteria here...">As a customer, I want to review items in my cart before checkout so that I can verify quantity and price before payment.
+
+Acceptance Criteria:
+- Cart displays all items with name, quantity, and price
+- User can update quantity or remove items
+- Subtotal and tax are calculated correctly
+- Proceed to Checkout button is enabled when cart has items</textarea>
+      <button type="button" class="btn-generate" id="btnGenerate">Generate Test Cases</button>
+      <p class="demo-hint">
+        Full AI flow runs in <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/LangFlow_TestcaseGenerator_Agent" target="_blank" rel="noopener">LangFlow</a> (import <code>Testcase_Generator.json</code>). Below is sample output from this agent.
+      </p>
+    </section>
+
+    <section class="panel" id="outputPanel">
+      <h2>Sample Output: Amazon Checkout Flow Test Cases</h2>
+      <p class="output-sub">Cart Review Page (TC001–TC015)</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TC ID</th>
+              <th>Description</th>
+              <th>Pre-condition</th>
+              <th>Steps</th>
+              <th>Expected Result</th>
+              <th>Priority</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TC001</td>
+              <td>Verify cart displays all added items</td>
+              <td>User logged in; items in cart</td>
+              <td>1. Open cart page<br>2. Review item list</td>
+              <td>All items show name, qty, price</td>
+              <td><span class="badge badge-high">High</span></td>
+              <td><span class="badge badge-positive">Positive</span></td>
+            </tr>
+            <tr>
+              <td>TC002</td>
+              <td>Update item quantity in cart</td>
+              <td>Cart has at least one item</td>
+              <td>1. Change quantity<br>2. Save / refresh</td>
+              <td>Subtotal updates correctly</td>
+              <td><span class="badge badge-high">High</span></td>
+              <td><span class="badge badge-positive">Positive</span></td>
+            </tr>
+            <tr>
+              <td>TC003</td>
+              <td>Remove item from cart</td>
+              <td>Multiple items in cart</td>
+              <td>1. Click Remove<br>2. Confirm</td>
+              <td>Item removed; totals recalculated</td>
+              <td><span class="badge badge-high">High</span></td>
+              <td><span class="badge badge-positive">Positive</span></td>
+            </tr>
+            <tr>
+              <td>TC004</td>
+              <td>Empty cart blocks checkout</td>
+              <td>No items in cart</td>
+              <td>1. Open cart<br>2. Check checkout button</td>
+              <td>Proceed to Checkout disabled</td>
+              <td><span class="badge badge-high">High</span></td>
+              <td><span class="badge badge-negative">Negative</span></td>
+            </tr>
+            <tr>
+              <td>TC005</td>
+              <td>Tax calculation on subtotal</td>
+              <td>Items with known prices</td>
+              <td>1. Note subtotal<br>2. Compare tax line</td>
+              <td>Tax matches configured rate</td>
+              <td><span class="badge badge-high">High</span></td>
+              <td><span class="badge badge-positive">Positive</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  <script>
+    document.getElementById("btnGenerate").addEventListener("click", function () {
+      document.getElementById("outputPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  </script>
+</body>
+</html>

@@ -3,52 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>3-AI-Agents-QA | Portfolio</title>
+  <title>QA AI Agents Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
-    <p class="badge">QA · AI · Automation</p>
-    <h1>3-AI-Agents-QA</h1>
-    <p class="lead">Three AI agents for test planning, test cases, document Q&amp;A, and automation code.</p>
-    <div class="links">
-      <a href="https://github.com/Manjusha3010/3-AI-Agents-QA" target="_blank" rel="noopener">GitHub</a>
-      <a id="live-demo" href="https://web-one-chi-16.vercel.app" target="_blank" rel="noopener">Test Orchestrator (Vercel)</a>
-    </div>
-  </header>
+  <div class="page">
+    <header class="portfolio-header">
+      <h1>QA AI Agents Portfolio</h1>
+      <p>Intelligent automation solutions for quality assurance</p>
+    </header>
 
-  <main class="grid">
-    <article class="card">
-      <h2>n8n Advanced RAG</h2>
-      <p>Upload documents → vector store → chat with re-ranked answers (Qdrant, Mistral, Cohere, Groq).</p>
-      <img src="assets/n8n-1.png" alt="n8n workflow" />
-      <img src="assets/n8n-2.png" alt="n8n chat" />
-      <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/N8N_Advance_RAG">View on GitHub</a>
-    </article>
+    <main class="agents-grid">
+      <article class="agent-card agent-purple">
+        <span class="agent-label">AGENT 1</span>
+        <h2>QA Test Case Generator</h2>
+        <p class="desc">
+          Paste any requirement and get structured test cases instantly. Automate test case creation with AI-powered analysis.
+        </p>
+        <div class="tech-stack">
+          <strong>Tech Stack:</strong> LangFlow + Groq
+        </div>
+        <a class="btn-agent" href="agent1.html">View Agent</a>
+      </article>
 
-    <article class="card">
-      <h2>LangFlow Test Case Generator</h2>
-      <p>Paste a user story → get 10+ test cases in one HTML table.</p>
-      <img src="assets/langflow-flow.png" alt="LangFlow flow" />
-      <img src="assets/langflow-output.png" alt="LangFlow output" />
-      <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/LangFlow_TestcaseGenerator_Agent">View on GitHub</a>
-    </article>
+      <article class="agent-card agent-orange">
+        <span class="agent-label">AGENT 2</span>
+        <h2>n8n Advanced RAG</h2>
+        <p class="desc">
+          Upload documents and chat with your knowledge base. Vector search with re-ranked answers for accurate QA context.
+        </p>
+        <div class="tech-stack">
+          <strong>Tech Stack:</strong> n8n + Qdrant + Mistral + Cohere + Groq
+        </div>
+        <a class="btn-agent" href="agent2.html">View Agent</a>
+      </article>
 
-    <article class="card card-wide">
-      <h2>Test Orchestrator</h2>
-      <p>Jira stories → AI test plan → test cases → Playwright / Selenium code. Full web app (React + FastAPI).</p>
-      <div class="gallery">
-        <img src="assets/orch-dashboard.png" alt="Dashboard" />
-        <img src="assets/orch-jira.png" alt="Jira" />
-        <img src="assets/orch-plan.png" alt="Test plan" />
-        <img src="assets/orch-cases.png" alt="Test cases" />
-      </div>
-      <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/Test%20Orchestrator">View on GitHub</a>
-    </article>
-  </main>
+      <article class="agent-card agent-green">
+        <span class="agent-label">AGENT 3</span>
+        <h2>QA Dashboard</h2>
+        <p class="desc">
+          Live view of test execution results with pass/fail stats and GitHub issue links. Real-time visibility into test health.
+        </p>
+        <div class="tech-stack">
+          <strong>Tech Stack:</strong> React + FastAPI + Vercel
+        </div>
+        <a class="btn-agent" href="https://web-one-chi-16.vercel.app" target="_blank" rel="noopener">View Dashboard</a>
+      </article>
+    </main>
 
-  <footer>
-    <p>Import n8n / LangFlow JSON from GitHub. Run Test Orchestrator locally with START.bat or use the Vercel UI with a hosted API.</p>
-  </footer>
+    <p class="footer-note">
+      <a href="https://github.com/Manjusha3010/3-AI-Agents-QA" target="_blank" rel="noopener">View source on GitHub</a>
+    </p>
+  </div>
 </body>
 </html>
