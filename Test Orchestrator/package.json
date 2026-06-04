@@ -1,0 +1,8 @@
+{
+  "name": "test-orchestrator",
+  "private": true,
+  "description": "Run npm start — builds UI, starts server, opens http://127.0.0.1:8000",
+  "scripts": {
+    "start": "node start.mjs"
+  }
+}

@@ -1,0 +1,36 @@
+TEST ORCHESTRATOR — FIX "CONNECTION REFUSED"
+=============================================
+
+When you see "refused to connect" in Chrome, NOTHING is running on port 8000.
+Usually the server window was closed by mistake.
+
+HOW TO START (Windows)
+------------------------
+
+1. Double-click:  START.bat
+
+2. TWO things happen:
+   - This window: builds the app, then can be CLOSED when it says so.
+   - A SECOND black window opens titled:
+     "KEEP OPEN - Test Orchestrator (server)"
+     DO NOT CLOSE THAT ONE while you use the site.
+
+3. Chrome should open http://127.0.0.1:8000
+   If not, type that address yourself.
+
+HOW TO STOP
+-----------
+
+Double-click:  STOP-SERVER.bat
+
+Or close ONLY the window titled "KEEP OPEN - Test Orchestrator (server)".
+
+TROUBLESHOOTING
+---------------
+
+- start-error.log  = errors from the last START.bat run
+- Port busy: run STOP-SERVER.bat, then START.bat again
+- Need: Node.js + Python 3 on PATH
+
+Optional: same terminal as before (one window only):
+  npm start -- --foreground

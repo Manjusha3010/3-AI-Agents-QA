@@ -1,0 +1,27 @@
+# Dependencies & builds
+**/node_modules/
+**/dist/
+server/.venv/
+**/__pycache__/
+*.pyc
+
+# Secrets & logs
+.env
+.env.*
+!.env.example
+start-error.log
+**/start-error.log
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local runtime
+server/_run_server_window.cmd
+.tmp/*
+!.tmp/.gitkeep
+
+# Optional large local files
+*.docx

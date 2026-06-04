@@ -1,0 +1,10 @@
+server/.venv/
+server/__pycache__/
+server/**/__pycache__/
+web/node_modules/
+web/dist/
+.tmp/*
+!.tmp/.gitkeep
+.env
+*.pyc
+server/_run_server_window.cmd
