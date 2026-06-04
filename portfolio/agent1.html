@@ -3,38 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QA Test Case Generator | Agent 1</title>
+  <title>LangFlow Test Case Generator | Agent 1</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="demo-page">
+  <div class="project-page">
     <a class="back-link" href="index.html">← Back to Portfolio</a>
 
-    <section class="panel">
-      <h2>Paste Your Requirements</h2>
-      <textarea id="requirements" readonly placeholder="Paste your user story or acceptance criteria here...">As a customer, I want to review items in my cart before checkout so that I can verify quantity and price before payment.
-
-Acceptance Criteria:
-- Cart displays all items with name, quantity, and price
-- User can update quantity or remove items
-- Subtotal and tax are calculated correctly
-- Proceed to Checkout button is enabled when cart has items</textarea>
-      <button type="button" class="btn-generate" id="btnGenerate">Generate Test Cases</button>
-      <p class="demo-hint">
-        Full AI flow runs in <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/LangFlow_TestcaseGenerator_Agent" target="_blank" rel="noopener">LangFlow</a> (import <code>Testcase_Generator.json</code>). Below is sample output from this agent.
+    <header class="project-hero">
+      <p class="project-tags">LangFlow · AI · QA Automation</p>
+      <h1>LangFlow Test Case Generator</h1>
+      <p class="project-lead">
+        A visual LangFlow agent that turns user stories into structured HTML test-case tables —
+        positive, negative, edge, boundary, and validation scenarios in one shot.
       </p>
+      <div class="project-actions">
+        <a class="btn-primary" href="https://github.com/Manjusha3010/3-AI-Agents-QA/blob/main/LangFlow_TestcaseGenerator_Agent/Testcase_Generator.json" target="_blank" rel="noopener">Download Flow JSON</a>
+        <a class="btn-secondary" href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/LangFlow_TestcaseGenerator_Agent" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>How the flow connects</h2>
+      <p class="section-intro">Four nodes wired in a single pipeline — your user story enters at the left; the HTML table leaves on the right.</p>
+      <div class="flow-diagram" aria-label="LangFlow node connections">
+        <div class="flow-node">Chat Input<br><span>User story</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Prompt Template<br><span>QA rules + {User_Story}</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node accent">Groq Model<br><span>llama-3.1-8b-instant</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Chat Output<br><span>HTML table</span></div>
+      </div>
     </section>
 
-    <section class="panel" id="outputPanel">
-      <h2>Sample Output: Amazon Checkout Flow Test Cases</h2>
-      <p class="output-sub">Cart Review Page (TC001–TC015)</p>
+    <section class="panel">
+      <h2>What it does</h2>
+      <ol class="steps-list">
+        <li>
+          <strong>You paste a user story</strong>
+          <span>From Jira, a BRD, or the Playground chat — acceptance criteria included.</span>
+        </li>
+        <li>
+          <strong>Prompt Template applies QA rules</strong>
+          <span>Minimum 10 cases, TC001-style IDs, one HTML table only, mixed test types.</span>
+        </li>
+        <li>
+          <strong>Groq generates the table</strong>
+          <span>Senior QA Engineer persona; columns for scenario, steps, expected result, priority, type.</span>
+        </li>
+        <li>
+          <strong>Chat Output returns HTML</strong>
+          <span>Copy into Excel, Confluence, or your test tool after review.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>Example input (this project)</h2>
+      <pre class="story-box">As a registered user, I want to reset my password using my email address,
+so that I can regain access if I forget my password.
+
+Acceptance criteria:
+- Reset link can be requested from the login page
+- Email is sent within 2 minutes
+- Link expires after 24 hours
+- New password must be at least 8 characters with one number
+- User sees confirmation after a successful reset</pre>
+    </section>
+
+    <section class="panel">
+      <h2>Sample output: Password Reset Module</h2>
+      <p class="output-sub">Generated format (TC001–TC010+) — excerpt from this agent’s rules</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>TC ID</th>
-              <th>Description</th>
-              <th>Pre-condition</th>
+              <th>Scenario</th>
               <th>Steps</th>
               <th>Expected Result</th>
               <th>Priority</th>
@@ -44,58 +90,94 @@ Acceptance Criteria:
           <tbody>
             <tr>
               <td>TC001</td>
-              <td>Verify cart displays all added items</td>
-              <td>User logged in; items in cart</td>
-              <td>1. Open cart page<br>2. Review item list</td>
-              <td>All items show name, qty, price</td>
+              <td>Valid reset email requested</td>
+              <td>1. Open login<br>2. Click Forgot password<br>3. Enter registered email<br>4. Submit</td>
+              <td>Success message; email queued within 2 min</td>
               <td><span class="badge badge-high">High</span></td>
               <td><span class="badge badge-positive">Positive</span></td>
             </tr>
             <tr>
               <td>TC002</td>
-              <td>Update item quantity in cart</td>
-              <td>Cart has at least one item</td>
-              <td>1. Change quantity<br>2. Save / refresh</td>
-              <td>Subtotal updates correctly</td>
+              <td>Reset link opens set-password form</td>
+              <td>1. Open link from email<br>2. Enter new password + confirm</td>
+              <td>Form loads; password rules shown</td>
               <td><span class="badge badge-high">High</span></td>
               <td><span class="badge badge-positive">Positive</span></td>
             </tr>
             <tr>
               <td>TC003</td>
-              <td>Remove item from cart</td>
-              <td>Multiple items in cart</td>
-              <td>1. Click Remove<br>2. Confirm</td>
-              <td>Item removed; totals recalculated</td>
-              <td><span class="badge badge-high">High</span></td>
-              <td><span class="badge badge-positive">Positive</span></td>
-            </tr>
-            <tr>
-              <td>TC004</td>
-              <td>Empty cart blocks checkout</td>
-              <td>No items in cart</td>
-              <td>1. Open cart<br>2. Check checkout button</td>
-              <td>Proceed to Checkout disabled</td>
+              <td>Expired link after 24 hours</td>
+              <td>1. Use link older than 24h</td>
+              <td>Error: link expired; prompt to request new link</td>
               <td><span class="badge badge-high">High</span></td>
               <td><span class="badge badge-negative">Negative</span></td>
             </tr>
             <tr>
+              <td>TC004</td>
+              <td>Password without a number rejected</td>
+              <td>1. Enter 8+ chars, no digit<br>2. Submit</td>
+              <td>Validation error on password policy</td>
+              <td><span class="badge badge-high">Medium</span></td>
+              <td><span class="badge badge-negative">Validation</span></td>
+            </tr>
+            <tr>
               <td>TC005</td>
-              <td>Tax calculation on subtotal</td>
-              <td>Items with known prices</td>
-              <td>1. Note subtotal<br>2. Compare tax line</td>
-              <td>Tax matches configured rate</td>
+              <td>Unknown email — no account leak</td>
+              <td>1. Submit unregistered email</td>
+              <td>Generic success message (no “user not found”)</td>
               <td><span class="badge badge-high">High</span></td>
-              <td><span class="badge badge-positive">Positive</span></td>
+              <td><span class="badge badge-negative">Security</span></td>
+            </tr>
+            <tr>
+              <td>TC006</td>
+              <td>Reuse same reset link twice</td>
+              <td>1. Complete reset<br>2. Open same link again</td>
+              <td>Link invalid; cannot reset again</td>
+              <td><span class="badge badge-high">Medium</span></td>
+              <td><span class="badge badge-negative">Edge Case</span></td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="demo-hint">Full runs produce 10+ rows in one HTML table (TC001, TC002, …) per the flow prompt.</p>
     </section>
+
+    <section class="panel">
+      <h2>Quick setup</h2>
+      <ol class="steps-list numbered-plain">
+        <li>Open <a href="https://www.langflow.org/" target="_blank" rel="noopener">Langflow</a> → <strong>Import</strong> → choose <code>Testcase_Generator.json</code></li>
+        <li>Open flow <strong>Testcase_Generator</strong> (Langflow 1.8.x)</li>
+        <li>Set <strong>Groq API key</strong> on the Groq node</li>
+        <li>Open <strong>Playground</strong> → paste user story → send</li>
+        <li>Copy the HTML table from Chat Output → review before export</li>
+      </ol>
+    </section>
+
+    <section class="panel panel-note">
+      <h2>Important note</h2>
+      <p>
+        This page is <strong>project documentation</strong> on Vercel. The agent runs inside
+        <strong>Langflow</strong> (local or cloud), not on Vercel. Import the JSON and add your Groq key to use it live.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Screenshots</h2>
+      <div class="screenshot-grid">
+        <figure>
+          <img src="assets/langflow-flow.png" alt="LangFlow canvas showing Chat Input, Prompt Template, Groq, and Chat Output nodes connected" />
+          <figcaption>LangFlow canvas — node connections: Chat Input → Prompt Template → Groq → Chat Output</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/langflow-output.png" alt="LangFlow Playground output with HTML test case table" />
+          <figcaption>Playground output — HTML test case table from a real run</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="project-footer">
+      Built with LangFlow + Groq · Test Orchestrator suite · <a href="https://github.com/Manjusha3010/3-AI-Agents-QA">3-AI-Agents-QA</a>
+    </footer>
   </div>
-  <script>
-    document.getElementById("btnGenerate").addEventListener("click", function () {
-      document.getElementById("outputPanel").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  </script>
 </body>
 </html>
