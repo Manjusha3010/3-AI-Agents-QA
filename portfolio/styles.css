@@ -596,3 +596,78 @@ tbody tr:hover {
     transform: rotate(90deg);
   }
 }
+
+/* Theme variants: Agent 2 (orange), Agent 3 (green) */
+.theme-orange .project-tags { color: #fb923c; }
+.theme-orange .btn-primary { background: var(--orange); }
+.theme-orange .btn-primary:hover { background: var(--orange-hover); }
+.theme-orange .flow-node.accent { border-color: var(--orange); box-shadow: 0 0 0 1px rgba(234, 88, 12, 0.35); }
+.theme-orange .flow-arrow { color: var(--orange); }
+.theme-orange .steps-list li::before { background: var(--orange); }
+.theme-orange .output-sub { color: #fdba74; }
+.theme-orange .demo-hint a,
+.theme-orange .project-footer a { color: #fb923c; }
+.theme-orange .btn-secondary:hover { border-color: var(--orange); color: #fdba74; }
+
+.theme-green .project-tags { color: #4ade80; }
+.theme-green .btn-primary { background: var(--green); }
+.theme-green .btn-primary:hover { background: var(--green-hover); }
+.theme-green .flow-node.accent { border-color: var(--green); box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35); }
+.theme-green .flow-arrow { color: var(--green); }
+.theme-green .steps-list li::before { background: var(--green); }
+.theme-green .output-sub { color: #86efac; }
+.theme-green .demo-hint a,
+.theme-green .project-footer a { color: #4ade80; }
+.theme-green .btn-secondary:hover { border-color: var(--green); color: #86efac; }
+
+.theme-purple .project-tags { color: #a78bfa; }
+
+.flow-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 1.25rem 0 0.65rem;
+}
+
+.flow-label:first-of-type {
+  margin-top: 0;
+}
+
+.chat-sample {
+  background: #0d1117;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.chat-sample p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #c9d1d9;
+  line-height: 1.5;
+}
+
+.chat-sample p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-q strong { color: #fb923c; }
+.theme-green .chat-q strong { color: #4ade80; }
+
+.feature-list {
+  color: var(--muted);
+  font-size: 0.95rem;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.feature-list li {
+  margin-bottom: 0.5rem;
+}
+
+.theme-green thead th {
+  background: #14532d;
+  color: #bbf7d0;
+}

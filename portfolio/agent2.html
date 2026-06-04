@@ -6,42 +6,131 @@
   <title>n8n Advanced RAG | Agent 2</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="demo-page">
+<body class="theme-orange">
+  <div class="project-page">
     <a class="back-link" href="index.html">← Back to Portfolio</a>
 
-    <header class="agent2-hero">
+    <header class="project-hero">
+      <p class="project-tags">n8n · RAG · Vector Search</p>
       <h1>n8n Advanced RAG</h1>
-      <p>Document ingestion and AI chat with vector search and Cohere re-ranking</p>
+      <p class="project-lead">
+        Upload QA documents, store them in Qdrant, then chat with an AI agent that retrieves context,
+        re-ranks with Cohere, and answers with Groq — smarter than plain vector search alone.
+      </p>
+      <div class="project-actions">
+        <a class="btn-primary" href="https://github.com/Manjusha3010/3-AI-Agents-QA/blob/main/N8N_Advance_RAG/AdvanceRAG.json" target="_blank" rel="noopener">Download Workflow JSON</a>
+        <a class="btn-secondary" href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/N8N_Advance_RAG" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
     </header>
 
     <section class="panel">
-      <h2>How it works</h2>
-      <p style="color: var(--muted); margin-bottom: 1rem;">
-        Upload a file via the form trigger → chunks are embedded (Mistral) and stored in Qdrant.
-        Ask questions in chat → the AI agent retrieves context, re-ranks with Cohere, and answers with Groq.
-      </p>
-      <div class="tech-stack" style="border-left-color: var(--orange); margin-bottom: 0;">
-        <strong>Tech Stack:</strong> n8n + Qdrant + Mistral + Cohere + Groq
+      <h2>How the workflow connects</h2>
+      <p class="section-intro">Two pipelines in one n8n workflow — <strong>Ingestion</strong> (top) and <strong>Chat / RAG</strong> (bottom).</p>
+
+      <p class="flow-label">Ingestion path</p>
+      <div class="flow-diagram" aria-label="n8n ingestion connections">
+        <div class="flow-node">Form upload<br><span>PDF / DOC</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Text splitter<br><span>Chunks + overlap</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Mistral embeddings<br><span>Vectors</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node accent">Qdrant store<br><span>Advance_RAG</span></div>
+      </div>
+
+      <p class="flow-label">Chat path</p>
+      <div class="flow-diagram" aria-label="n8n RAG chat connections">
+        <div class="flow-node">Chat trigger<br><span>Your question</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node accent">AI Agent<br><span>+ memory</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Qdrant retrieve<br><span>As tool</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Cohere rerank<br><span>Best chunks</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Groq answer<br><span>gpt-oss-120b</span></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>Workflow &amp; chat</h2>
-      <div class="feature-grid">
-        <figure>
-          <img src="assets/n8n-1.png" alt="n8n ingestion workflow" />
-          <figcaption>Ingestion pipeline</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/n8n-2.png" alt="n8n RAG chat" />
-          <figcaption>RAG chat output</figcaption>
-        </figure>
+      <h2>What it does</h2>
+      <ol class="steps-list">
+        <li>
+          <strong>Ingest your documents</strong>
+          <span>Upload via form → split → embed with Mistral → save to Qdrant collection <code>Advance_RAG</code>.</span>
+        </li>
+        <li>
+          <strong>Ask questions in chat</strong>
+          <span>Chat trigger sends your message to the AI Agent (with short-term memory).</span>
+        </li>
+        <li>
+          <strong>Retrieve and re-rank</strong>
+          <span>Agent calls Qdrant as a tool; Cohere reranker picks the most relevant chunks.</span>
+        </li>
+        <li>
+          <strong>Get a grounded answer</strong>
+          <span>Groq composes the reply from re-ranked context — ideal for test plans, SOPs, and BRDs.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>Example use (this project)</h2>
+      <pre class="story-box">Upload: QA_Test_Strategy_2026.pdf
+
+Chat question:
+"What are the entry criteria for regression testing before a release?"
+
+Expected behavior:
+Agent pulls matching sections from the PDF (via Qdrant + Cohere)
+and summarizes them in plain language — not a generic LLM guess.</pre>
+    </section>
+
+    <section class="panel">
+      <h2>Sample chat output (illustrative)</h2>
+      <div class="chat-sample">
+        <p class="chat-q"><strong>You:</strong> What does our doc say about test environment setup?</p>
+        <p class="chat-a"><strong>Agent:</strong> Based on your uploaded strategy, regression runs require a staging environment mirroring production data masks, smoke suite green within 24h of build, and sign-off from QA lead before promote…</p>
       </div>
-      <p class="demo-hint" style="margin-top: 1.25rem;">
-        Import <a href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/N8N_Advance_RAG" target="_blank" rel="noopener">AdvanceRAG.json</a> into your n8n instance and connect API credentials.
+      <p class="demo-hint">Real answers depend on the documents you ingest and your connected API keys.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Quick setup</h2>
+      <ol class="steps-list numbered-plain">
+        <li>Open <a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a> → <strong>Import</strong> → <code>AdvanceRAG.json</code></li>
+        <li>Create Qdrant collection <strong>Advance_RAG</strong></li>
+        <li>Add credentials: Qdrant, Mistral, Cohere, Groq on each node</li>
+        <li>Enable <strong>Ingestion</strong> nodes if disabled → activate → upload a file via form URL</li>
+        <li>Use <strong>When chat message received</strong> → ask questions after ingestion completes</li>
+      </ol>
+    </section>
+
+    <section class="panel panel-note">
+      <h2>Important note</h2>
+      <p>
+        This page is <strong>documentation on Vercel</strong>. The workflow runs in <strong>n8n</strong> (cloud or self-hosted), not on Vercel.
+        Import the JSON and connect your own API keys to use it live.
       </p>
     </section>
+
+    <section class="panel">
+      <h2>Screenshots</h2>
+      <div class="screenshot-grid">
+        <figure>
+          <img src="assets/n8n-1.png" alt="n8n workflow canvas with ingestion and RAG nodes" />
+          <figcaption>n8n canvas — ingestion pipeline and RAG chat agents wired together</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/n8n-2.png" alt="n8n chat answering from vector database" />
+          <figcaption>Chat session — AI agent answering from your document store</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="project-footer">
+      Built with n8n + Qdrant + Mistral + Cohere + Groq · <a href="https://github.com/Manjusha3010/3-AI-Agents-QA">3-AI-Agents-QA</a>
+    </footer>
   </div>
 </body>
 </html>

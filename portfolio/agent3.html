@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test Orchestrator | Agent 3</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-green">
+  <div class="project-page">
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <header class="project-hero">
+      <p class="project-tags">React · FastAPI · Jira · QA Automation</p>
+      <h1>Test Orchestrator</h1>
+      <p class="project-lead">
+        Full-stack web app: pull user stories from Jira, generate AI test plans and structured test cases,
+        then export Playwright or Selenium automation code — one sidebar, end-to-end.
+      </p>
+      <div class="project-actions">
+        <a class="btn-primary" href="https://web-one-chi-16.vercel.app" target="_blank" rel="noopener">Open Live App (Vercel)</a>
+        <a class="btn-secondary" href="https://github.com/Manjusha3010/3-AI-Agents-QA/tree/main/Test%20Orchestrator" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>How the app flows</h2>
+      <p class="section-intro">React UI talks to FastAPI; FastAPI calls Jira and your chosen LLM (Groq, Gemini, or Ollama).</p>
+      <div class="flow-diagram" aria-label="Test Orchestrator user journey">
+        <div class="flow-node">Jira story<br><span>Fetch / sample</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Test plan<br><span>AI markdown</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node accent">Test cases<br><span>Structured JSON</span></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-node">Code Generator<br><span>Playwright / Selenium</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>What it does</h2>
+      <ol class="steps-list">
+        <li>
+          <strong>Connect Jira &amp; LLM</strong>
+          <span>Settings for Groq/Gemini/Ollama; Jira URL + API token — or load sample stories without Jira.</span>
+        </li>
+        <li>
+          <strong>Generate test plan</strong>
+          <span>Pick a story → AI writes a markdown plan you can copy or extend.</span>
+        </li>
+        <li>
+          <strong>Create test cases</strong>
+          <span>From the plan → structured cases with steps, priority, status — edit in Test Case Creator.</span>
+        </li>
+        <li>
+          <strong>Dashboard &amp; automation</strong>
+          <span>Filter cases on the dashboard; Code Generator outputs Playwright (JS/Python) or Selenium (Python).</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>Example story (this project)</h2>
+      <pre class="story-box">Jira: SCRUM-42 — API rate limiting for partner integrations
+
+Summary:
+As an API consumer, I want rate limits enforced per API key
+so that platform stability is protected under load.
+
+You click: Generate Test Plan → Create Test Cases → Code Generator (Playwright)</pre>
+    </section>
+
+    <section class="panel">
+      <h2>Sample output: test case excerpt</h2>
+      <p class="output-sub">After plan generation — structured cases in the app</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Steps</th>
+              <th>Expected</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TC-SCRUM-42-1</td>
+              <td>Under limit — requests succeed</td>
+              <td>Send N requests below threshold</td>
+              <td>All return 200</td>
+              <td><span class="badge badge-high">High</span></td>
+            </tr>
+            <tr>
+              <td>TC-SCRUM-42-2</td>
+              <td>Over limit — 429 returned</td>
+              <td>Exceed per-key quota in 1 minute</td>
+              <td>HTTP 429 + Retry-After header</td>
+              <td><span class="badge badge-high">High</span></td>
+            </tr>
+            <tr>
+              <td>TC-SCRUM-42-3</td>
+              <td>Invalid API key rejected</td>
+              <td>Call endpoint with bad key</td>
+              <td>401 Unauthorized</td>
+              <td><span class="badge badge-high">High</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="demo-hint">Story history saves prior Jira keys (plan + cases) when you switch tickets.</p>
+    </section>
+
+    <section class="panel">
+      <h2>App screens (sidebar)</h2>
+      <ul class="feature-list">
+        <li>Dashboard — KPIs and summary table</li>
+        <li>Jira Integration Module — connect, fetch stories</li>
+        <li>Test Plan Generator · Test Case Creator · Test Case Dashboard</li>
+        <li>Code Generator · Story history · Settings</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Quick setup</h2>
+      <p class="flow-label">Local (full features)</p>
+      <ol class="steps-list numbered-plain">
+        <li>Install <strong>Node.js</strong> + <strong>Python 3.11+</strong></li>
+        <li>Open <code>Test Orchestrator</code> → run <strong>START.bat</strong></li>
+        <li>Browser: <strong>http://127.0.0.1:8000</strong> — keep the server window open</li>
+        <li>Settings → LLM key → Jira (or sample stories) → generate plan &amp; cases</li>
+      </ol>
+      <p class="flow-label">Vercel UI only</p>
+      <ol class="steps-list numbered-plain">
+        <li>Use <strong>Open Live App</strong> above for the React frontend</li>
+        <li>For API calls from Vercel, host <code>server/</code> on Railway/Render and set <code>VITE_API_URL</code></li>
+      </ol>
+    </section>
+
+    <section class="panel panel-note">
+      <h2>Important note</h2>
+      <p>
+        <strong>Vercel</strong> hosts the frontend build. <strong>FastAPI</strong> must run locally (<code>START.bat</code>) or on a Python host for Jira/LLM generation.
+        API keys stay in your browser (localStorage) for demo use.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Screenshots</h2>
+      <div class="screenshot-grid">
+        <figure>
+          <img src="assets/orch-dashboard.png" alt="Test Orchestrator dashboard" />
+          <figcaption>Dashboard — overview and test-case summary</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-jira.png" alt="Jira integration screen" />
+          <figcaption>Jira Integration — connect and fetch user stories</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-plan.png" alt="Test plan generator" />
+          <figcaption>Test Plan Generator — AI plan from selected story</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/orch-cases.png" alt="Test case creator" />
+          <figcaption>Test Case Creator — review and edit generated cases</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="project-footer">
+      Built with React + FastAPI + Vercel · <a href="https://github.com/Manjusha3010/3-AI-Agents-QA">3-AI-Agents-QA</a>
+    </footer>
+  </div>
+</body>
+</html>
